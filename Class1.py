@@ -11,13 +11,11 @@ window_h = 600
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-
 FPS = 120
 
 window = pygame.display.set_mode((window_w, window_h))
 pygame.display.set_caption("Game: ")
 clock = pygame.time.Clock()
-
 
 def game_loop():
 
@@ -38,7 +36,7 @@ def game_loop():
                 quit()
 
         pos_x += velocity[0]
-        pos_y += velocity[1]
+        pos_y -= velocity[1]
 
         if pos_x + block_size > window_w or pos_x < 0:
             velocity[0] = -velocity[0]
@@ -48,7 +46,7 @@ def game_loop():
             velocity[1] = -velocity[1]
             color = (randint(0, 255), randint(0, 255), randint(0, 255))
 
-        # DRAW
+        # Draw frame and rectangle
         window.fill(black)
         pygame.draw.rect(window, color, [pos_x, pos_y, block_size, block_size])
         pygame.display.update()
