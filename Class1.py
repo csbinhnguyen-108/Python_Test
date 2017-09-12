@@ -1,17 +1,25 @@
-import tkinter
+from tkinter import *
 from tkinter import messagebox
 
-top = tkinter.Tk()
+class App:
+    def __init__(self,master):
+        def onClick():
+            messagebox.showinfo("Hello", "Hellooooooooooooooo!!!")
 
+        frame = Frame(master)
+        frame.pack()
 
-def helloCallBack():
-    messagebox.showinfo("Hello", "Hello World")
+        self.button = Button(frame, text="Quit", fg="red", command=frame.quit)
+        self.button.pack(side=LEFT)
 
-B = tkinter.Button(top, text ="Hello", command = helloCallBack)
+        self.hi = Button(frame, text="Hello", fg="blue", command=onClick)
+        self.hi.pack(side=LEFT)
 
-B.pack()
+root = Tk()
 
-top.mainloop()
+app = App(root)
+
+root.mainloop()
 
 '''
 # Add two numbers
