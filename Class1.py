@@ -3,7 +3,8 @@ from tkinter import messagebox
 import pygame
 
 pygame.init()
-screen = pygame.display.set_mode((400,300))
+screen_size = (400, 300)
+screen = pygame.display.set_mode(screen_size)
 done = False
 is_blue = True
 x = 30
@@ -33,7 +34,7 @@ while not done:
         color = (0, 128, 255)
     else:
         color = (255, 100, 0)
-    pygame.draw.rect(screen, color, pygame.Rect(30, 30, 60, 60))
+    pygame.draw.rect(screen, color, pygame.Rect(x, y, 60, 60))
 
     pygame.display.flip()
     clock.tick(60)
