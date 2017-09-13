@@ -27,8 +27,8 @@ class Ball:
     def checkCollision(self, window_w, window_h, velocity=[]):
         if self.pos_x + self.size > window_w or self.pos_x < 0:
             velocity[0] = -velocity[0]
-            color = (randint(0, 255), randint(0, 255), randint(0, 255))
+            self.color = (randint(0, 255), randint(0, 255), randint(0, 255))
 
         if self.pos_y + self.size > window_h or self.pos_y < 0:
             velocity[1] = -velocity[1]
-            color = (randint(0, 255), randint(0, 255), randint(0, 255))
+            self.color = (randint(0, 255), randint(0, 255), randint(0, 255))

@@ -14,17 +14,19 @@ black = (0, 0, 0)
 
 FPS = 120
 
-ballList = []
-
 window = pygame.display.set_mode((window_w, window_h))
 pygame.display.set_caption("Game: ")
 clock = pygame.time.Clock()
 
+offset = 20
 block_size = 20
 pos_x = window_w / 2
 pos_y = window_h / 2
-ball1 = Ball.Ball(white, pos_x, pos_y, block_size)
-ball2 = Ball.Ball(white, pos_x - 20, pos_y - 20, block_size)
+ballList = []
+
+for x in range(0, 3):
+    ballList.append(Ball.Ball(white, pos_x + (offset * x), pos_y + (offset * x), block_size))
+
 
 
 def game_loop():
@@ -40,16 +42,16 @@ def game_loop():
                 pygame.quit()
                 quit()
 
-        ball1.moveBall(velocity[0], velocity[1])
-        ball1.checkCollision(window_w, window_h, velocity)
+        for x in range(0, len(ballList)):
+            ballList[x].moveBall(velocity[0], velocity[1])
+            ballList[x].checkCollision(window_w, window_h, velocity)
 
-        ball2.moveBall(velocity[0], velocity[1])
-        ball2.checkCollision(window_w, window_h, velocity)
 
         # Draw frame and rectangle
         window.fill(black)
-        pygame.draw.rect(window, ball1.getColor(), [ball1.getPosX(), ball1.getPosY(), ball1.getSize(), ball1.getSize()])
-        pygame.draw.rect(window, ball2.getColor(), [ball2.getPosX(), ball2.getPosY(), ball2.getSize(), ball2.getSize()])
+        for x in range(0, len(ballList)):
+            pygame.draw.rect(window, ballList[x].getColor(), [ballList[x].getPosX(), ballList[x].getPosY(), ballList[x].getSize(), ballList[x].getSize()])
+
         pygame.display.update()
         clock.tick(FPS)
         pygame.display.flip()
