@@ -28,7 +28,6 @@ for x in range(0, 3):
     ballList.append(Ball.Ball(white, pos_x + (offset * x), pos_y + (offset * x), block_size))
 
 
-
 def game_loop():
     velocity = [2, 2]
 
@@ -46,11 +45,12 @@ def game_loop():
             ballList[x].moveBall(velocity[0], velocity[1])
             ballList[x].checkCollision(window_w, window_h, velocity)
 
-
         # Draw frame and rectangle
         window.fill(black)
         for x in range(0, len(ballList)):
-            pygame.draw.rect(window, ballList[x].getColor(), [ballList[x].getPosX(), ballList[x].getPosY(), ballList[x].getSize(), ballList[x].getSize()])
+            pygame.draw.rect(window, ballList[x].getColor(),
+                             [ballList[x].getPosX(), ballList[x].getPosY(), ballList[x].getSize(),
+                              ballList[x].getSize()])
 
         pygame.display.update()
         clock.tick(FPS)
