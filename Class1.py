@@ -12,7 +12,7 @@ window_h = 600
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-FPS = 60
+FPS = 120
 
 ballList = []
 
@@ -28,7 +28,7 @@ ball2 = Ball.Ball(white, pos_x - 20, pos_y - 20, block_size)
 
 
 def game_loop():
-    velocity = [3, 3]
+    velocity = [2, 2]
 
     color = (255, 255, 255)
     running = True
@@ -40,11 +40,11 @@ def game_loop():
                 pygame.quit()
                 quit()
 
-            ball1.moveBall(velocity[0], velocity[1])
-            ball1.checkCollision(window_w, window_h, velocity)
+        ball1.moveBall(velocity[0], velocity[1])
+        ball1.checkCollision(window_w, window_h, velocity)
 
-            ball2.moveBall(velocity[0], velocity[1])
-            ball2.checkCollision(window_w, window_h, velocity)
+        ball2.moveBall(velocity[0], velocity[1])
+        ball2.checkCollision(window_w, window_h, velocity)
 
         # Draw frame and rectangle
         window.fill(black)
@@ -52,6 +52,7 @@ def game_loop():
         pygame.draw.rect(window, ball2.getColor(), [ball2.getPosX(), ball2.getPosY(), ball2.getSize(), ball2.getSize()])
         pygame.display.update()
         clock.tick(FPS)
+        pygame.display.flip()
 
 
 game_loop()
