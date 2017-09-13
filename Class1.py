@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import pygame
 from random import randint
+import Ball
 
 pygame.init()
 
@@ -11,20 +12,24 @@ window_h = 600
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-FPS = 120
+FPS = 60
+
+ballList = []
 
 window = pygame.display.set_mode((window_w, window_h))
 pygame.display.set_caption("Game: ")
 clock = pygame.time.Clock()
 
+block_size = 20
+pos_x = window_w / 2
+pos_y = window_h / 2
+ball1 = Ball.Ball(white, pos_x, pos_y, block_size)
+ball2 = Ball.Ball(white, pos_x - 20, pos_y - 20, block_size)
+
+
 def game_loop():
-
-    block_size = 20
-
     velocity = [3, 3]
 
-    pos_x = window_w/2
-    pos_y = window_h/2
     color = (255, 255, 255)
     running = True
 
@@ -35,25 +40,22 @@ def game_loop():
                 pygame.quit()
                 quit()
 
-        pos_x += velocity[0]
-        pos_y -= velocity[1]
+            ball1.moveBall(velocity[0], velocity[1])
+            ball1.checkCollision(window_w, window_h, velocity)
 
-        if pos_x + block_size > window_w or pos_x < 0:
-            velocity[0] = -velocity[0]
-            color = (randint(0, 255), randint(0, 255), randint(0, 255))
-
-        if pos_y + block_size > window_h or pos_y < 0:
-            velocity[1] = -velocity[1]
-            color = (randint(0, 255), randint(0, 255), randint(0, 255))
+            ball2.moveBall(velocity[0], velocity[1])
+            ball2.checkCollision(window_w, window_h, velocity)
 
         # Draw frame and rectangle
         window.fill(black)
-        pygame.draw.rect(window, color, [pos_x, pos_y, block_size, block_size])
+        pygame.draw.rect(window, ball1.getColor(), [ball1.getPosX(), ball1.getPosY(), ball1.getSize(), ball1.getSize()])
+        pygame.draw.rect(window, ball2.getColor(), [ball2.getPosX(), ball2.getPosY(), ball2.getSize(), ball2.getSize()])
         pygame.display.update()
         clock.tick(FPS)
 
 
 game_loop()
+
 '''Pygame Moving Rectangle Test
 pygame.init()
 screen_size = (400, 300)
@@ -93,7 +95,8 @@ while not done:
     pygame.display.flip()
     clock.tick(60)
 '''
-'''Tkinter Test
+'''
+# Tkinter Test
 class App:
     def __init__(self,master):
         def onClick():
