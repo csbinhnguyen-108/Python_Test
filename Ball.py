@@ -12,10 +12,10 @@ class Ball:
         return self.color
 
     def getPosX(self):
-        return self.pos_x
+        return int(self.pos_x)
 
     def getPosY(self):
-        return self.pos_y
+        return int(self.pos_y)
 
     def getSize(self):
         return self.size

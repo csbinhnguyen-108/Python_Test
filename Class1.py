@@ -45,12 +45,11 @@ def game_loop():
             ballList[x].moveBall(velocity[0], velocity[1])
             ballList[x].checkCollision(window_w, window_h, velocity)
 
-        # Draw frame and rectangle
+        # Draw frame and square
         window.fill(black)
         for x in range(0, len(ballList)):
-            pygame.draw.rect(window, ballList[x].getColor(),
-                             [ballList[x].getPosX(), ballList[x].getPosY(), ballList[x].getSize(),
-                              ballList[x].getSize()])
+            pygame.draw.circle(window, ballList[x].getColor(), (ballList[x].getPosX(), ballList[x].getPosY()),
+                               10)
 
         pygame.display.update()
         clock.tick(FPS)
